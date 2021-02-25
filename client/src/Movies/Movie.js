@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import MovieCard from "./MovieCard";
 
-function Movie({ addToSavedList, addUpdatedMovie }) {
+function Movie({ addToSavedList }) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
 
