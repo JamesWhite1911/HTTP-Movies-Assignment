@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link, useHistory } from "react-router-dom";
 import MovieCard from "./MovieCard";
+import MovieList from "./MovieList";
 
-function Movie({ addToSavedList }) {
+const Movie = (props) => {
+  const { addToSavedList } = props;
   const [movie, setMovie] = useState(null);
   const params = useParams();
   const push = useHistory();
@@ -23,8 +25,8 @@ function Movie({ addToSavedList }) {
     axios
       .delete(`http://localhost:5000/api/movies/${params.id}`)
       .then(res => {
-        setMovie(res.data);
-        push('/')
+        console.log(res)
+        props.history.push(`/`)
       })
       .catch(err => console.log("Error while trying to delete an item", err))
   };
@@ -52,7 +54,7 @@ function Movie({ addToSavedList }) {
       </div>
 
       <div className="delete-button" onClick={deleteMovie}>
-        Delete
+          Delete
       </div>
     </div>
   );

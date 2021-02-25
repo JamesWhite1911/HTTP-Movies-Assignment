@@ -30,6 +30,7 @@ const MovieForm = props => {
             .post(`http://localhost:5000/api/movies/`, movie)
             .then(res => {
                 props.setMovieList(res.data)
+                props.history.push(`/`)
             })
             .catch(err => console.log(err))
     }
