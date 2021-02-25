@@ -3,32 +3,21 @@ import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 const initialMovie = {
-    id: '',
+    id: Date.now(),
     title: '',
     director: '',
     metascore: '',
-    // stars: ["data", "data", "data"],
+    stars: ["data", "data", "data"],
 }
 
 const MovieForm = props => {
     const [movie, setMovie] = useState(initialMovie)
-    const id = props.movies.length + 1;
-    const { push } = useHistory();
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:5000/api/movies/`)
-            .then(res => {
-                setMovie(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, []);
+    const id = 1
 
     const handleChange = e => {
         e.persist();
         let value = e.target.value;
+
         setMovie({
             ...movie,
             [e.target.name]: value
@@ -37,12 +26,10 @@ const MovieForm = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(id)
         axios
-            .put(`http://localhost:5000/api/movies/${id}`, movie)
+            .post(`http://localhost:5000/api/movies/`, movie)
             .then(res => {
                 props.setMovieList(res.data)
-                push(`/movies/${id}`)
             })
             .catch(err => console.log(err))
     }

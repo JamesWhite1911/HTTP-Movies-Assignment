@@ -19,9 +19,9 @@ function Movie({ addToSavedList }) {
     addToSavedList(movie);
   };
 
-  const deleteMovie = (id) => {
+  const deleteMovie = () => {
     axios
-      .delete(`http://localhost:5000/api/movies/${id}`)
+      .delete(`http://localhost:5000/api/movies/${params.id}`)
       .then(res => {
         setMovie(res.data);
         push('/')
